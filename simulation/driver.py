@@ -47,7 +47,23 @@ class SimulationDriver:
                 "owner-secret",
             )
 
-            latency = random.randint(90, 150)
+            base_processing = 60
+            proof_verification = 18
+            relay_delay = 12
+            merkle_update = 8
+
+            network_delay = random.randint(0, 8)
+
+            load_penalty = num_transactions // 500
+
+            latency = (
+                base_processing
+                + proof_verification
+                + relay_delay
+                + merkle_update
+                + network_delay
+                + load_penalty
+            )
 
             if success:
                 self.metrics.add_success(latency)
@@ -55,6 +71,7 @@ class SimulationDriver:
                 self.metrics.add_failure()
 
         self.print_results()
+        return self.metrics
 
     def print_results(self):
 
