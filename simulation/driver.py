@@ -64,3 +64,6 @@ class SimulationDriver:
         print(f"Failed       : {self.metrics.failed}")
         print(f"Success Rate : {self.metrics.success_rate():.2%}")
         print(f"Avg Latency  : {self.metrics.average_latency():.2f} ms")
+
+        self.metrics.save_csv()
+        print("\nResults saved to results/simulation.csv")
